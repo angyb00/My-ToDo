@@ -4,8 +4,29 @@
   color: transparent;
   margin-top: 20px;
   margin-left: 20px;
+  margin-bottom: 50px;
   background-clip: text;
   -webkit-background-clip: text;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.add-new-todo {
+  background-image: radial-gradient(#553c9a, #ee4b2b);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin-left: 20px;
+  margin-bottom: 50px;
+  cursor: pointer;
 }
 
 
