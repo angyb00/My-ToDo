@@ -4,8 +4,17 @@
   color: transparent;
   margin-top: 20px;
   margin-left: 20px;
+  margin-bottom: 100px;
   background-clip: text;
   -webkit-background-clip: text;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
 }
 
 
