@@ -1,8 +1,28 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import '../root/signin.css'
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
 
 export default function SignUp(){
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function createUserAccount(){
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                
+            })
+            .catch((error) => {
+                console.log(error.message);
+            })
+    }
+    
 
     return (
         <div>
@@ -36,7 +56,7 @@ export default function SignUp(){
                 </Form>
             </div>
             <div className='signin-button'>
-                <Button>Signup</Button>
+                <Button onClick={createUserAccount}>Signup</Button>
             </div>
         </div>
     )
