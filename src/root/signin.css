@@ -1,0 +1,47 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    background-image: radial-gradient(#9585c3, #ee4b2b);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-top: 10px; 
+}
+
+.form-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 100px;
+    background-image: radial-gradient(#9585c3, #ee4b2b);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.signin-button {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 300px;
+    background-color: rgb(158, 11, 158) !important;
+    border-color: rgb(158, 11, 158);
+}
+
+.btn:hover{
+    border-color: rgb(158, 11, 158) !important;
+}
+
+.btn:active{
+    background-color: rgb(101, 5, 101) !important;
+}
+
+.form-input {
+    width: 300px;
+}
