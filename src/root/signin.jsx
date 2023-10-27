@@ -1,5 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './signin.css'
 
 export default function Signin(){
@@ -21,14 +22,13 @@ export default function Signin(){
                         <Form.Control type='password' placeholder='Password'/>
                     </Form.Group>
                 </Form>
-                
             </div>
             <div className='signin-button'>
                 <Button>Log In</Button>
             </div>
-            <div className='signin-button'>
+            <Link to={`signup`} className='signin-button'>
                 <Button>Sign Up</Button>
-            </div>
+            </Link>
         </div>
     )
 }

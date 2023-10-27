@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Signin from './root/signin';
 import ErrorPage from './ErrorPage';
+import SignUp from './routes/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     element: <Signin/>,
     errorElement: <ErrorPage/>
   },
+  {
+    path: "/signup",
+    element: <SignUp/>
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
