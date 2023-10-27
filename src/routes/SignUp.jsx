@@ -21,8 +21,18 @@ export default function SignUp(){
                 SaveUserToFirestore(firstName, lastName, email, user.uid);
             })
             .catch((error) => {
+                console.log("Reached here");
                 console.log(error.message);
-            })
+            });
+    }
+
+    function handleSignUp(){
+        const passwordNotMatching = "Passwords don't match";
+        if(password !== confirmPassword){
+            alert(passwordNotMatching);
+            return
+        }
+        createUserAccount();
     }
 
     return (
@@ -57,7 +67,7 @@ export default function SignUp(){
                 </Form>
             </div>
             <div className='main-button'>
-                <Button onClick={createUserAccount}>Signup</Button>
+                <Button onClick={handleSignUp}>Signup</Button>
             </div>
         </div>
     )
