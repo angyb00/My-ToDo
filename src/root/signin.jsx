@@ -23,10 +23,10 @@ export default function Signin(){
                     </Form.Group>
                 </Form>
             </div>
-            <div className='signin-button'>
+            <div className='main-button'>
                 <Button>Log In</Button>
             </div>
-            <Link to={`signup`} className='signin-button'>
+            <Link to={`signup`} className='main-button'>
                 <Button>Sign Up</Button>
             </Link>
         </div>
