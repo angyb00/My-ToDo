@@ -4,6 +4,7 @@ import '../root/signin.css'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { SaveUserToFirestore } from '../FirebaseUtils/SaveUserFirestore';
 
 export default function SignUp(){
 
@@ -11,18 +12,18 @@ export default function SignUp(){
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     async function createUserAccount(){
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                
+                SaveUserToFirestore(firstName, lastName, email, user.uid);
             })
             .catch((error) => {
                 console.log(error.message);
             })
     }
-    
 
     return (
         <div>
@@ -35,27 +36,27 @@ export default function SignUp(){
                 <Form>
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" placeholder='John' className='form-input'/>
+                        <Form.Control type="name" placeholder='John' className='form-input' onChange={(event) => setFirstName(event.target.value)}/>
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="name" placeholder='Doe' className='form-input'/>
+                        <Form.Control type="name" placeholder='Doe' className='form-input' onChange={(event) => setLastName(event.target.value)}/>
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="email" placeholder='name@example.com' className='form-input'/>
+                        <Form.Control type="email" placeholder='name@example.com' className='form-input' onChange={(event) => setEmail(event.target.value)}/>
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type='password' placeholder='Password'/>
+                        <Form.Control type='password' placeholder='Password' onChange={(event) => setPassword(event.target.value)}/>
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
-                        <Form.Label> Confirm Password</Form.Label>
-                        <Form.Control type='password' placeholder='Password'/>
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type='password' placeholder='Password' onChange={(event) => setConfirmPassword(event.target.value)}/>
                     </Form.Group>
                 </Form>
             </div>
-            <div className='signin-button'>
+            <div className='main-button'>
                 <Button onClick={createUserAccount}>Signup</Button>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { db } from "../firebase";
+import { collection, setDoc, doc } from "firebase/firestore"
 
 
 async function SaveUserToFirestore(firstName, lastName, email, uid){

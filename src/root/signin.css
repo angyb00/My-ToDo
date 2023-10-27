@@ -21,7 +21,7 @@ h1 {
     -webkit-background-clip: text;
 }
 
-.signin-button {
+.main-button {
     display: flex;
     justify-content: center;
     align-items:center;
