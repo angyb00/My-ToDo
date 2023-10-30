@@ -15,7 +15,7 @@ import SignUp from './routes/SignUp';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signin/>,
+    element: <App/>,
     errorElement: <ErrorPage/>
   },
   {
