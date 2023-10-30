@@ -1,4 +1,4 @@
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { collection, setDoc, doc } from "firebase/firestore"
 
 
@@ -18,4 +18,21 @@ async function SaveUserToFirestore(firstName, lastName, email, uid){
     }
 }
 
-export { SaveUserToFirestore };
+async function AddNewToDo(todoTitle, todoText){
+    const refTodo = collection(db, "ToDos");
+
+    try {
+        const docRef = await addDoc(refTodo, {
+            todo_title: todoTitle,
+            todo_text: todoText,
+            user_id: auth.currentUser.uid
+        });
+        console.log("Todo doc created: ", docRef.id);
+    }
+    catch(error){
+        console.log("Error adding todo: ", error.message);
+    }
+}
+
+
+export { SaveUserToFirestore, AddNewToDo };

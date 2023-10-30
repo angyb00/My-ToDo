@@ -1,7 +1,6 @@
 import './App.css';
 import ToDoCard from './ToDoCard';
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
@@ -10,6 +9,8 @@ import { useState } from 'react';
 function App() {
 
   const [showModal, setShowModal] = useState(false);
+  const [todoTitle, setTodoTitle] = useState('');
+  const [todoText, setTodoText] = useState('');
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
 
@@ -55,11 +56,15 @@ function App() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
                 <Form.Label>Title</Form.Label>
                 <Form.Control
                   type="text"
                   autoFocus
+                  onChange={(event) => setTodoTitle(event.target.value)}
                 />
               </Form.Group>
               <Form.Group
@@ -67,16 +72,20 @@ function App() {
                 controlId="exampleForm.ControlTextarea1"
               >
                 <Form.Label>Enter ToDo Information</Form.Label>
-                <Form.Control as="textarea" rows={3} />
+                <Form.Control 
+                  as="textarea" 
+                  rows={3} 
+                  onChange={(event) => setTodoText(event.target.value)}
+                />
               </Form.Group>
             </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
-            Close
+            Cancel
           </Button>
           <Button variant="primary" onClick={handleModalClose}>
-            Save Changes
+            Add new ToDo
           </Button>
         </Modal.Footer>
       </Modal>
