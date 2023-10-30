@@ -2,6 +2,7 @@ import './App.css';
 import ToDoCard from './ToDoCard';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
+import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 
@@ -42,11 +43,34 @@ function App() {
           <ToDoCard/>
           <ToDoCard/>
       </div>
-      <Modal show={showModal} onHide={handleModalClose}>
+
+      <Modal
+        show={showModal}
+        onHide={handleModalClose}
+        backdrop="static"
+        keyboard={false}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add new ToDo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <Form>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Enter ToDo Information</Form.Label>
+                <Form.Control as="textarea" rows={3} />
+              </Form.Group>
+            </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
