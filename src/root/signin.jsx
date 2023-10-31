@@ -1,9 +1,25 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import './signin.css'
 
 export default function Signin(){
+
+    const signinPressed = () => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                redirect("")
+
+            })
+
+        .catch((error) => {
+            alert("Wrong credentias");
+        });
+    
+    }
+
     return (
         <div>
             <section>

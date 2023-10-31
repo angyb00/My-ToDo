@@ -1,5 +1,5 @@
 import { auth, db } from "../firebase";
-import { collection, setDoc, doc } from "firebase/firestore"
+import { collection, setDoc, doc, query, where } from "firebase/firestore"
 
 
 async function SaveUserToFirestore(firstName, lastName, email, uid){
@@ -13,6 +13,7 @@ async function SaveUserToFirestore(firstName, lastName, email, uid){
         });
         console.log("Document written: ", docRef.id);
     }
+
     catch(error) {
         console.log("Doc write error: ", error.message);
     }
@@ -29,9 +30,16 @@ async function AddNewToDo(todoTitle, todoText){
         });
         console.log("Todo doc created: ", docRef.id);
     }
-    catch(error){
+
+    catch(error) {
         console.log("Error adding todo: ", error.message);
     }
+}
+
+async function fetchTodos(){
+    const q = query(collection(db, "ToDos"), where("user_id", "==", auth.currentUser.uid));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot;
 }
 
 
