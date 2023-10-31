@@ -16,17 +16,18 @@ function App() {
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
   const { state } = useLocation();
-  let todos = [];
+  const [todos, setTodos] = useState([]);
 
   const handleModalSave = () => {
     AddNewToDo(todoTitle, todoText);
+    setTodos([]);
+    handleModalClose();
   }
 
   useEffect(() => {
     fetchTodos(state.uid)
       .then(res => {
-        todos = res;
-        alert(todos[0])
+        setTodos(res);
       });
   }, [todos]);
 
@@ -49,19 +50,12 @@ function App() {
       </div>
 
       <div className='row-container'>
-          {/* <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/> */}
           {todos.map((res) => {
             return (
-              <ToDoCard/>
+              <ToDoCard 
+                title={res.todo_title}
+                bodyText={res.todo_text}
+              />
             )
           })}
       </div>
@@ -105,7 +99,7 @@ function App() {
           <Button variant="secondary" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleModalSave}>
+          <Button variant="primary" type='submit' onClick={handleModalSave}>
             Add new ToDo
           </Button>
         </Modal.Footer>

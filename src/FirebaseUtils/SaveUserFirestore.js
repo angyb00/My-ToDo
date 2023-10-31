@@ -39,13 +39,12 @@ async function AddNewToDo(todoTitle, todoText){
 async function fetchTodos(uid){
     const q = query(collection(db, "ToDos"), where("user_id", "==", uid));
     const querySnapshot = await getDocs(q);
-    // if (querySnapshot.length != 0){
-    //     return querySnapshot.data;
-    // }
-    // else {
-    //     return []
-    // }
-    return querySnapshot;
+    const todos = [];
+  
+    querySnapshot.forEach(doc => { 
+        todos.push(doc.data());
+    })
+    return todos;
 }
 
 async function fetchUser(user_id){
