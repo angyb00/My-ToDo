@@ -1,23 +1,31 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { Link, redirect } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import './signin.css'
+import { fetchUser } from '../FirebaseUtils/SaveUserFirestore';
+import { useState } from 'react';
 
 export default function Signin(){
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
     const signinPressed = () => {
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                redirect("")
-
+                fetchUser(user.uid)
+                    .then(res => {
+                        navigate('/home', {state: { firstName: res.first_name, lastName: res.last_name } });
+                    });
             })
 
         .catch((error) => {
-            alert("Wrong credentias");
+            alert("Wrong credentials");
         });
-    
     }
 
     return (
@@ -31,16 +39,24 @@ export default function Signin(){
                 <Form>
                     <Form.Group>
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="email" placeholder='name@example.com' className='form-input'/>
+                        <Form.Control
+                        type="email"
+                        placeholder='name@example.com'
+                        className='form-input'
+                        onChange={(event) => setEmail(event.target.value)}/>
                     </Form.Group>
                     <Form.Group style={{marginTop: '10px'}}>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type='password' placeholder='Password'/>
+                        <Form.Control
+                        type='password'
+                        placeholder='Password'
+                        onChange={(event) => setPassword(event.target.value)}
+                        />
                     </Form.Group>
                 </Form>
             </div>
             <div className='main-button'>
-                <Button>Log In</Button>
+                <Button onClick={signinPressed}>Log In</Button>
             </div>
             <Link to={`signup`} className='main-button'>
                 <Button>Sign Up</Button>

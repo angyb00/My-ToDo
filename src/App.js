@@ -3,7 +3,8 @@ import ToDoCard from './ToDoCard';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
 
 function App() {
@@ -13,6 +14,10 @@ function App() {
   const [todoText, setTodoText] = useState('');
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
+  const state = useLocation();
+  const { firstName, lastName } = state; 
+  let name1 = "";
+  let name2 = "";
 
   return (
     <div>
@@ -20,7 +25,7 @@ function App() {
         <h1>
           My To-Do
         </h1>
-        <span style={{fontSize: 20, marginRight: "20px"}}>Hello, John Doe</span>
+        <span style={{fontSize: 20, marginRight: "20px"}}>Hello, {name1} {name2}</span>
       </section>
 
       <div className='add-new-todo'>

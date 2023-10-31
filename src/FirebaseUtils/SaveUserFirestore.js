@@ -1,5 +1,5 @@
 import { auth, db } from "../firebase";
-import { collection, setDoc, doc, query, where } from "firebase/firestore"
+import { collection, setDoc, doc, query, where, getDoc, getDocs } from "firebase/firestore"
 
 
 async function SaveUserToFirestore(firstName, lastName, email, uid){
@@ -39,8 +39,17 @@ async function AddNewToDo(todoTitle, todoText){
 async function fetchTodos(){
     const q = query(collection(db, "ToDos"), where("user_id", "==", auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
-    return querySnapshot;
+    return querySnapshot.data();
 }
 
+async function fetchUser(user_id){
+    const snap = await getDoc(doc(db, "Users", user_id));
+    if (snap) {
+        return snap.data();
+    }
+    else {
+        console.log("Failed fetch of user.");
+    }
+}
 
-export { SaveUserToFirestore, AddNewToDo };
+export { SaveUserToFirestore, AddNewToDo, fetchTodos, fetchUser };
