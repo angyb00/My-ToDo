@@ -3,8 +3,9 @@ import ToDoCard from './ToDoCard';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
 
 
 function App() {
@@ -15,6 +16,20 @@ function App() {
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
   const { state } = useLocation();
+  const [todos, setTodos] = useState([]);
+
+  const handleModalSave = () => {
+    AddNewToDo(todoTitle, todoText);
+    setTodos([]);
+    handleModalClose();
+  }
+
+  useEffect(() => {
+    fetchTodos(state.uid)
+      .then(res => {
+        setTodos(res);
+      });
+  }, [todos]);
 
   return (
     <div>
@@ -35,16 +50,14 @@ function App() {
       </div>
 
       <div className='row-container'>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
-          <ToDoCard/>
+          {todos.map((res) => {
+            return (
+              <ToDoCard 
+                title={res.todo_title}
+                bodyText={res.todo_text}
+              />
+            )
+          })}
       </div>
 
       <Modal
@@ -86,7 +99,7 @@ function App() {
           <Button variant="secondary" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleModalClose}>
+          <Button variant="primary" type='submit' onClick={handleModalSave}>
             Add new ToDo
           </Button>
         </Modal.Footer>

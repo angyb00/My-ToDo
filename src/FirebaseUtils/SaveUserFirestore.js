@@ -1,5 +1,5 @@
 import { auth, db } from "../firebase";
-import { collection, setDoc, doc, query, where, getDoc, getDocs } from "firebase/firestore"
+import { collection, setDoc, doc, query, where, getDoc, getDocs, addDoc } from "firebase/firestore"
 
 
 async function SaveUserToFirestore(firstName, lastName, email, uid){
@@ -36,10 +36,15 @@ async function AddNewToDo(todoTitle, todoText){
     }
 }
 
-async function fetchTodos(){
-    const q = query(collection(db, "ToDos"), where("user_id", "==", auth.currentUser.uid));
+async function fetchTodos(uid){
+    const q = query(collection(db, "ToDos"), where("user_id", "==", uid));
     const querySnapshot = await getDocs(q);
-    return querySnapshot.data();
+    const todos = [];
+  
+    querySnapshot.forEach(doc => { 
+        todos.push(doc.data());
+    });
+    return todos;
 }
 
 async function fetchUser(user_id){
