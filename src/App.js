@@ -14,10 +14,7 @@ function App() {
   const [todoText, setTodoText] = useState('');
   const handleModalShow = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
-  const state = useLocation();
-  const { firstName, lastName } = state; 
-  let name1 = "";
-  let name2 = "";
+  const { state } = useLocation();
 
   return (
     <div>
@@ -25,7 +22,7 @@ function App() {
         <h1>
           My To-Do
         </h1>
-        <span style={{fontSize: 20, marginRight: "20px"}}>Hello, {name1} {name2}</span>
+        <span style={{fontSize: 20, marginRight: "20px"}}>Hello, {state.firstName} {state.lastName}</span>
       </section>
 
       <div className='add-new-todo'>
