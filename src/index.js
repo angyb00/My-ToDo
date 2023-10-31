@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -16,11 +16,22 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Signin/>,
-    errorElement: <ErrorPage/>
+    errorElement: <ErrorPage/>,
+    // children: [
+    //   {
+    //     path: "/home",
+    //     element: <App/>
+    //   }
+    // ]
   },
+ 
   {
     path: "/signup",
     element: <SignUp/>
+  },
+  {
+    path: "/home",
+    element: <App/>
   }
 ])
 
