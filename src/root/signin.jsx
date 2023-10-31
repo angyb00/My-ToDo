@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import './signin.css'
@@ -40,17 +40,18 @@ export default function Signin(){
                     <Form.Group>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
-                        type="email"
-                        placeholder='name@example.com'
-                        className='form-input'
-                        onChange={(event) => setEmail(event.target.value)}/>
+                            type="email"
+                            placeholder='name@example.com'
+                            className='form-input'
+                            onChange={(event) => setEmail(event.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group style={{marginTop: '10px'}}>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                        type='password'
-                        placeholder='Password'
-                        onChange={(event) => setPassword(event.target.value)}
+                            type='password'
+                            placeholder='Password'
+                            onChange={(event) => setPassword(event.target.value)}
                         />
                     </Form.Group>
                 </Form>

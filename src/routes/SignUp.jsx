@@ -46,23 +46,46 @@ export default function SignUp(){
                 <Form>
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" placeholder='John' className='form-input' onChange={(event) => setFirstName(event.target.value)}/>
+                        <Form.Control
+                            type="name"
+                            placeholder='John'
+                            className='form-input'
+                            onChange={(event) => setFirstName(event.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="name" placeholder='Doe' className='form-input' onChange={(event) => setLastName(event.target.value)}/>
+                        <Form.Control
+                            type="name"
+                            placeholder='Doe'
+                            className='form-input'
+                            onChange={(event) => setLastName(event.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Email Address</Form.Label>
-                        <Form.Control type="email" placeholder='name@example.com' className='form-input' onChange={(event) => setEmail(event.target.value)}/>
+                        <Form.Control
+                            type="email"
+                            placeholder='name@example.com'
+                            className='form-input'
+                            onChange={(event) => setEmail(event.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type='password' placeholder='Password' onChange={(event) => setPassword(event.target.value)}/>
+                        <Form.Control
+                            type='password'
+                            placeholder='Password'
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className='margin-form-util'>
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type='password' placeholder='Password' onChange={(event) => setConfirmPassword(event.target.value)}/>
+                        <Form.Control
+                            type='password'
+                            placeholder='Password'
+                            onChange={(event) => setConfirmPassword(event.target.value)}
+                        />
                     </Form.Group>
                 </Form>
             </div>
