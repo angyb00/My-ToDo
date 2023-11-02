@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
+import { Link } from 'react-router-dom';
 
 
 function App() {
@@ -29,7 +30,9 @@ function App() {
       .then(res => {
         setTodos(res);
       });
-  }, [todos]);
+      console.log("Hellow world")
+
+  }, [todos.length]);
 
   return (
     <div>
@@ -53,8 +56,9 @@ function App() {
           {todos.map((res) => {
             return (
               <ToDoCard 
-                title={res.todo_title}
-                bodyText={res.todo_text}
+                title={res.data().todo_title}
+                bodyText={res.data().todo_text}
+                id={res.id}
               />
             )
           })}

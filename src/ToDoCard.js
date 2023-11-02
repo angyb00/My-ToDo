@@ -1,7 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-export default function ToDoCard({title, bodyText}){
+export default function ToDoCard({title, bodyText, id}){
     return (
         <Card
             bg="dark"
@@ -15,7 +16,8 @@ export default function ToDoCard({title, bodyText}){
                 <Card.Text>
                     {bodyText}
                 </Card.Text>
-                <Button variant="primary">Go to To-Do</Button>
+                {/* <Button variant="primary">Go to To-Do</Button> */}
+                <Link to={`/todo/${id}`}>Go to ToDo</Link>
             </Card.Body>
         </Card>
     )

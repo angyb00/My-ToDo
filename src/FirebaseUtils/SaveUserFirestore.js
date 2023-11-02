@@ -42,7 +42,7 @@ async function fetchTodos(uid){
     const todos = [];
   
     querySnapshot.forEach(doc => { 
-        todos.push(doc.data());
+        todos.push(doc);
     });
     return todos;
 }
