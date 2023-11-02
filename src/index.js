@@ -11,6 +11,7 @@ import {
 import Signin from './root/signin';
 import ErrorPage from './ErrorPage';
 import SignUp from './routes/SignUp';
+import TodoPage from './routes/TodoPage';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <App/>
+  },
+  {
+    path: "/todo/:id",
+    element: <TodoPage/>
   }
 ])
 

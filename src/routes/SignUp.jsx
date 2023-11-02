@@ -21,7 +21,6 @@ export default function SignUp(){
                 SaveUserToFirestore(firstName, lastName, email, user.uid);
             })
             .catch((error) => {
-                console.log("Reached here");
                 console.log(error.message);
             });
     }
