@@ -16,8 +16,9 @@ export default function ToDoCard({title, bodyText, id}){
                 <Card.Text>
                     {bodyText}
                 </Card.Text>
-                {/* <Button variant="primary">Go to To-Do</Button> */}
-                <Link to={`/todo/${id}`}>Go to ToDo</Link>
+                <Link to={`/todo/${id}`} style={{all: 'unset'}}>
+                    <Button variant='primary'>Go to ToDo</Button>
+                </Link>
             </Card.Body>
         </Card>
     )

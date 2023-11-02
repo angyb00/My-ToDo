@@ -1,8 +1,7 @@
-import { collection, getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-
 
 
 export default function TodoPage(){
@@ -11,7 +10,7 @@ export default function TodoPage(){
     const [bodyText, setBodyText] = useState('');
 
     useEffect(() => {
-        async function getTodoContents(){
+        async function getTodoContents() {
             const snap = await getDoc(doc(db, "ToDos", id));
             if (snap) {
                 setTitle(snap.data().todo_title);
@@ -31,6 +30,7 @@ export default function TodoPage(){
     return (
         <div>
             <h1>{title}</h1>
+            <div style={{color: 'white'}}>{bodyText}</div>
         </div>
     )
 }
