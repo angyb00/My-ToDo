@@ -2,15 +2,24 @@ import '../root/signin.css'
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export default function Settings(){
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const navigate = useNavigate();
 
     const updateButtonPressed = () => {
 
     };
+
+    // const navigateToHome = () => {
+    //     fetchUser(userID)
+    //         .then((res) => {
+    //             navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: userID } });
+    //         });
+    // };
 
     return (
         <div>
@@ -42,6 +51,9 @@ export default function Settings(){
             </div>
             <div className='main-button'>
                 <Button onClick={updateButtonPressed}>Update Settings</Button>
+            </div>
+            <div className="main-button">
+                <Button>Go Home</Button>
             </div>
         </div>
     );
