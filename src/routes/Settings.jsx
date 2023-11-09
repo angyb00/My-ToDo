@@ -2,24 +2,27 @@ import '../root/signin.css'
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { fetchUser } from '../FirebaseUtils/SaveUserFirestore';
+import { useNavigate, useParams } from 'react-router';
 
 export default function Settings(){
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const updateButtonPressed = () => {
 
     };
 
-    // const navigateToHome = () => {
-    //     fetchUser(userID)
-    //         .then((res) => {
-    //             navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: userID } });
-    //         });
-    // };
+    const navigateToHome = () => {
+        fetchUser(id)
+            .then((res) => {
+                navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: id } });
+            });
+    };
+
 
     return (
         <div>
@@ -34,7 +37,7 @@ export default function Settings(){
                         <Form.Label>Change First Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder='name@example.com'
+                            placeholder='First Name'
                             className='form-input'
                             onChange={(event) => setFirstName(event.target.value)}
                         />
@@ -43,7 +46,7 @@ export default function Settings(){
                         <Form.Label>Change Last Name</Form.Label>
                         <Form.Control
                             type='text'
-                            placeholder='Password'
+                            placeholder='Last Name'
                             onChange={(event) => setLastName(event.target.value)}
                         />
                     </Form.Group>
@@ -53,7 +56,7 @@ export default function Settings(){
                 <Button onClick={updateButtonPressed}>Update Settings</Button>
             </div>
             <div className="main-button">
-                <Button>Go Home</Button>
+                <Button onClick={navigateToHome}>Go Home</Button>
             </div>
         </div>
     );

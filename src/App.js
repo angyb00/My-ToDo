@@ -49,7 +49,7 @@ function App() {
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Divider/>
           <Dropdown.Item>
-            <Link to="/" style={{all: "unset"}}>
+            <Link to={`/settings/${state.uid}`} style={{all: "unset"}}>
               Logout
             </Link>
           </Dropdown.Item>
