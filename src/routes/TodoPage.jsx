@@ -2,21 +2,25 @@ import { getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import '../App.css'
+import { fetchUser } from "../FirebaseUtils/SaveUserFirestore";
 
 
 export default function TodoPage(){
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [bodyText, setBodyText] = useState('');
+    const [userID, setUserID] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [todoTitle, setTodoTitle] = useState('');
     const [todoText, setTodoText] = useState('');
     const handleModalShow = () => setShowModal(true);
     const handleModalClose = () => setShowModal(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getTodoContents() {
@@ -24,6 +28,7 @@ export default function TodoPage(){
             if (snap) {
                 setTitle(snap.data().todo_title);
                 setBodyText(snap.data().todo_text);
+                setUserID(snap.data().user_id);
             }
             else {
                 console.log("Fetch failed");
@@ -47,8 +52,14 @@ export default function TodoPage(){
 
         EditTodo();
         handleModalClose();
-    }
+    };
 
+    const navigateToHome = () => {
+        fetchUser(userID)
+            .then((res) => {
+                navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: userID } });
+            });
+    };
 
     return (
         <div>
@@ -58,9 +69,9 @@ export default function TodoPage(){
                     <button className='unset-helper' onClick={handleModalShow}>
                         <div className="header-button-helper">Edit</div>
                     </button>
-                    <button className="unset-helper">
+                    <Button className="unset-helper" onClick={navigateToHome}>
                         <div className="header-button-helper">Home</div>
-                    </button>
+                    </Button>
                 </div>
             </section>
             <div style={{color: 'white', marginTop: '50px', marginLeft: '20px'}}>{bodyText}</div>

@@ -6,8 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
-import { Link } from 'react-router-dom';
-
 
 function App() {
 
