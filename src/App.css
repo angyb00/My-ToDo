@@ -50,3 +50,12 @@
 .App-link {
   color: #61dafb;
 }
+
+.header-button-helper {
+  font-size: 30px;
+  margin-right: 20px;
+}
+
+.unset-helper {
+  all: unset;
+}

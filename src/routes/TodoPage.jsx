@@ -2,6 +2,8 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Button } from "react-bootstrap";
+import '../App.css'
 
 
 export default function TodoPage(){
@@ -29,8 +31,13 @@ export default function TodoPage(){
 
     return (
         <div>
-            <h1>{title}</h1>
-            <div style={{color: 'white'}}>{bodyText}</div>
+            <section className="root-header">
+                <h1>{title}</h1>
+                <button className='unset-helper'>
+                    <div className="header-button-helper">Edit</div>
+                </button>
+            </section>
+            <div style={{color: 'white', marginTop: '50px', marginLeft: '20px'}}>{bodyText}</div>
         </div>
     )
 }
