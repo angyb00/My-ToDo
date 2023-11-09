@@ -6,8 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
-import { Link } from 'react-router-dom';
-
 
 function App() {
 
@@ -40,11 +38,11 @@ function App() {
         <h1>
           My To-Do
         </h1>
-        <span style={{fontSize: 20, marginRight: "20px"}}>Hello, {state.firstName} {state.lastName}</span>
+        <span className='header-button-helper'>Hello, {state.firstName} {state.lastName}</span>
       </section>
 
       <div className='add-new-todo'>
-        <button style={{all: "unset"}} onClick={handleModalShow}>
+        <button className='unset-helper' onClick={handleModalShow}>
           <h3>
               <i class="bi bi-clipboard-plus-fill"></i>
               <span style={{marginLeft: "10px"}}>Add New To-Do</span>

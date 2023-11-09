@@ -19,7 +19,7 @@ export default function Signin(){
                 const user = userCredential.user;
                 fetchUser(user.uid)
                     .then(res => {
-                        navigate('/home', {state: { firstName: res.first_name, lastName: res.last_name, uid: user.uid } });
+                        navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: user.uid } });
                     });
             })
 

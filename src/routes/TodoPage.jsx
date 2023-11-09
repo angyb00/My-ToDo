@@ -1,13 +1,26 @@
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
+import { Button } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import '../App.css'
+import { fetchUser } from "../FirebaseUtils/SaveUserFirestore";
 
 
 export default function TodoPage(){
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [bodyText, setBodyText] = useState('');
+    const [userID, setUserID] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [todoTitle, setTodoTitle] = useState('');
+    const [todoText, setTodoText] = useState('');
+    const handleModalShow = () => setShowModal(true);
+    const handleModalClose = () => setShowModal(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getTodoContents() {
@@ -15,6 +28,7 @@ export default function TodoPage(){
             if (snap) {
                 setTitle(snap.data().todo_title);
                 setBodyText(snap.data().todo_text);
+                setUserID(snap.data().user_id);
             }
             else {
                 console.log("Fetch failed");
@@ -26,11 +40,86 @@ export default function TodoPage(){
 
     }, [title, bodyText]);
 
+    const handleEditSave = () => {
+        async function EditTodo(){
+            await setDoc(doc(db, "ToDos", id), {
+                todo_text: todoText,
+                todo_title: todoTitle
+            }, { merge: true });
+            setTitle(todoText);
+            setTodoText(todoText);
+        }
+
+        EditTodo();
+        handleModalClose();
+    };
+
+    const navigateToHome = () => {
+        fetchUser(userID)
+            .then((res) => {
+                navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: userID } });
+            });
+    };
 
     return (
         <div>
-            <h1>{title}</h1>
-            <div style={{color: 'white'}}>{bodyText}</div>
+            <section className="root-header">
+                <h1>{title}</h1>
+                <div className="header-buttons-container">
+                    <button className='unset-helper' onClick={handleModalShow}>
+                        <div className="header-button-helper">Edit</div>
+                    </button>
+                    <Button className="unset-helper" onClick={navigateToHome}>
+                        <div className="header-button-helper">Home</div>
+                    </Button>
+                </div>
+            </section>
+            <div style={{color: 'white', marginTop: '50px', marginLeft: '20px'}}>{bodyText}</div>
+
+            <Modal
+                show={showModal}
+                onHide={handleModalClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                <Modal.Title>Edit ToDo</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlInput1"
+                    >
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                        type="text"
+                        autoFocus
+                        onChange={(event) => setTodoTitle(event.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>Enter ToDo Information</Form.Label>
+                        <Form.Control 
+                        as="textarea" 
+                        rows={3} 
+                        onChange={(event) => setTodoText(event.target.value)}
+                        />
+                    </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleModalClose}>
+                    Cancel
+                </Button>
+                <Button variant="primary" type='submit' onClick={handleEditSave}>
+                    Edit ToDo
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
