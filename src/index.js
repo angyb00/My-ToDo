@@ -12,11 +12,12 @@ import Signin from './root/signin';
 import ErrorPage from './ErrorPage';
 import SignUp from './routes/SignUp';
 import TodoPage from './routes/TodoPage';
+import Settings from './routes/Settings';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signin/>,
+    element: <Settings/>,
     errorElement: <ErrorPage/>,
   },
   {
