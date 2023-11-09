@@ -8,7 +8,7 @@ export default function ToDoCard({title, bodyText, id}){
             bg="dark"
             text="white"
             border="light"
-            style={{marginBottom: "50px"}}
+            style={{marginBottom: "50px", marginLeft: "20px"}}
         >
             <Card.Header>{title}</Card.Header>
             <Card.Body>
