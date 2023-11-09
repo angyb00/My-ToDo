@@ -1,7 +1,7 @@
 import '../root/signin.css'
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchUser } from '../FirebaseUtils/SaveUserFirestore';
 import { useNavigate, useParams } from 'react-router';
 
@@ -11,6 +11,14 @@ export default function Settings(){
     const [lastName, setLastName] = useState('');
     const { id } = useParams();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetchUser()
+            .then(res => {
+                setFirstName(res.first_name);
+                setLastName(res.last_name);
+            });
+    }, []);
 
     const updateButtonPressed = () => {
 
@@ -37,7 +45,7 @@ export default function Settings(){
                         <Form.Label>Change First Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder='First Name'
+                            placeholder={`${firstName}`}
                             className='form-input'
                             onChange={(event) => setFirstName(event.target.value)}
                         />
@@ -46,7 +54,7 @@ export default function Settings(){
                         <Form.Label>Change Last Name</Form.Label>
                         <Form.Control
                             type='text'
-                            placeholder='Last Name'
+                            placeholder={`${lastName}`}
                             onChange={(event) => setLastName(event.target.value)}
                         />
                     </Form.Group>

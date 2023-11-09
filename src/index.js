@@ -17,7 +17,7 @@ import Settings from './routes/Settings';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Settings/>,
+    element: <Signin/>,
     errorElement: <ErrorPage/>,
   },
   {
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/todo/:id",
     element: <TodoPage/>
+  },
+  {
+    path: "/settings/:id",
+    element: <Settings/>
   }
 ])
 
