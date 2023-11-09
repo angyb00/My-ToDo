@@ -54,9 +54,14 @@ export default function TodoPage(){
         <div>
             <section className="root-header">
                 <h1>{title}</h1>
-                <button className='unset-helper' onClick={handleModalShow}>
-                    <div className="header-button-helper">Edit</div>
-                </button>
+                <div className="header-buttons-container">
+                    <button className='unset-helper' onClick={handleModalShow}>
+                        <div className="header-button-helper">Edit</div>
+                    </button>
+                    <button className="unset-helper">
+                        <div className="header-button-helper">Home</div>
+                    </button>
+                </div>
             </section>
             <div style={{color: 'white', marginTop: '50px', marginLeft: '20px'}}>{bodyText}</div>
 
