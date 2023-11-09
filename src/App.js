@@ -3,6 +3,8 @@ import ToDoCard from './ToDoCard';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
@@ -38,7 +40,15 @@ function App() {
         <h1>
           My To-Do
         </h1>
-        <span className='header-button-helper'>Hello, {state.firstName} {state.lastName}</span>
+        <DropdownButton
+          size="lg"
+          title={`Hello, ${state.firstName} ${state.lastName}!`}
+          className="header-button-helper"
+        >
+          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Divider/>
+          <Dropdown.Item>Log Out</Dropdown.Item>
+        </DropdownButton>
       </section>
 
       <div className='add-new-todo'>
