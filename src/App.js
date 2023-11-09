@@ -8,6 +8,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AddNewToDo, fetchTodos } from './FirebaseUtils/SaveUserFirestore';
+import { Link } from 'react-router-dom';
 
 function App() {
 
@@ -47,7 +48,11 @@ function App() {
         >
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Divider/>
-          <Dropdown.Item>Log Out</Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/" style={{all: "unset"}}>
+              Logout
+            </Link>
+          </Dropdown.Item>
         </DropdownButton>
       </section>
 
