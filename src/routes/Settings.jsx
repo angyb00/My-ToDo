@@ -13,7 +13,7 @@ export default function Settings(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchUser()
+        fetchUser(id)
             .then(res => {
                 setFirstName(res.first_name);
                 setLastName(res.last_name);
@@ -30,7 +30,6 @@ export default function Settings(){
                 navigate('/home', { state: { firstName: res.first_name, lastName: res.last_name, uid: id } });
             });
     };
-
 
     return (
         <div>
