@@ -4,11 +4,14 @@ import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { fetchUser } from '../FirebaseUtils/SaveUserFirestore';
 import { useNavigate, useParams } from 'react-router';
+import { setDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function Settings(){
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -18,10 +21,20 @@ export default function Settings(){
                 setFirstName(res.first_name);
                 setLastName(res.last_name);
             });
-    }, []);
+        console.log('Settings useeffect');
+    }, [loading]);
 
     const updateButtonPressed = () => {
-
+        async function editUser(){
+            await setDoc(doc(db, "Users", id), {
+                first_name: firstName,
+                last_name: lastName
+            },{ merge: true });
+            setFirstName(firstName);
+            setLastName(lastName);
+        };
+        editUser();
+        setLoading(!loading);
     };
 
     const navigateToHome = () => {
