@@ -46,7 +46,11 @@ function App() {
           title={`Hello, ${state.firstName} ${state.lastName}!`}
           className="header-button-helper"
         >
-          <Dropdown.Item>Settings</Dropdown.Item>
+          <Dropdown.Item>
+            <Link to={`/settings/${state.uid}`} style={{all: "unset"}}>
+              Settings
+            </Link>
+          </Dropdown.Item>
           <Dropdown.Divider/>
           <Dropdown.Item>
             <Link to="/" style={{all: "unset"}}>

@@ -12,6 +12,7 @@ import Signin from './root/signin';
 import ErrorPage from './ErrorPage';
 import SignUp from './routes/SignUp';
 import TodoPage from './routes/TodoPage';
+import Settings from './routes/Settings';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/todo/:id",
     element: <TodoPage/>
+  },
+  {
+    path: "/settings/:id",
+    element: <Settings/>
   }
 ])
 

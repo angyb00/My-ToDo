@@ -48,7 +48,7 @@ export default function TodoPage(){
             }, { merge: true });
             setTitle(todoText);
             setTodoText(todoText);
-        }
+        };
 
         EditTodo();
         handleModalClose();
