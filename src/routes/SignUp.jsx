@@ -5,6 +5,7 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { SaveUserToFirestore } from '../FirebaseUtils/SaveUserFirestore';
+import { useNavigate } from 'react-router';
 
 export default function SignUp(){
 
@@ -13,12 +14,13 @@ export default function SignUp(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
     async function createUserAccount(){
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                SaveUserToFirestore(firstName, lastName, email, user.uid);
+                SaveUserToFirestore(firstName, lastName, email, userCredential.user.uid);
+                navigate('/home', { state: { firstName: firstName, lastName: lastName, uid: userCredential.user.uid } } )
             })
             .catch((error) => {
                 console.log(error.message);

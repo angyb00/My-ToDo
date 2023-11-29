@@ -4,13 +4,12 @@ import { collection, setDoc, doc, query, where, getDoc, getDocs, addDoc } from "
 
 async function SaveUserToFirestore(firstName, lastName, email, uid){
     const refUser = collection(db, "Users");
-
     try {
         const docRef = await setDoc(doc(refUser, uid), {
             first_name: firstName,
             last_name: lastName,
             email: email
-        });
+        });        
         console.log("Document written: ", docRef.id);
     }
 
