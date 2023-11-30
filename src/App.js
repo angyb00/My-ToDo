@@ -19,10 +19,11 @@ function App() {
   const handleModalClose = () => setShowModal(false);
   const { state } = useLocation();
   const [todos, setTodos] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   const handleModalSave = () => {
     AddNewToDo(todoTitle, todoText);
-    setTodos([]);
+    setCounter(prev => prev + 1);
     handleModalClose();
   }
 
@@ -31,9 +32,8 @@ function App() {
       .then(res => {
         setTodos(res);
       });
-      console.log("Hellow world")
 
-  }, [todos.length]);
+  }, [counter]);
 
   return (
     <div>

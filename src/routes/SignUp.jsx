@@ -1,11 +1,12 @@
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import '../root/signin.css'
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { SaveUserToFirestore } from '../FirebaseUtils/SaveUserFirestore';
 import { useNavigate } from 'react-router';
+import { setDoc, doc } from 'firebase/firestore';
 
 export default function SignUp(){
 
@@ -17,14 +18,14 @@ export default function SignUp(){
     const navigate = useNavigate();
 
     async function createUserAccount(){
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                SaveUserToFirestore(firstName, lastName, email, userCredential.user.uid);
-                navigate('/home', { state: { firstName: firstName, lastName: lastName, uid: userCredential.user.uid } } )
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
+        await setDoc(doc(db, "Users", user.uid), {
+            first_name: firstName,
+            last_name: lastName,
+            email: email
+        });
+        navigate('/home', { state: { firstName: firstName, lastName: lastName, uid: user.uid } } );
     }
 
     function handleSignUp(){
